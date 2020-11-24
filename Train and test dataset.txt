@@ -1,0 +1,17 @@
+dataset = []
+def loadDataset(filename , split , trSet , teSet):
+    with open("my.dat" , 'rb') as f:
+        while True:
+            try:
+                dataset.append(pickle.load(f))
+            except EOFError:
+                f.close()
+                break  
+    for x in range(len(dataset)):
+        if random.random() <split :      
+            trSet.append(dataset[x])
+        else:
+            teSet.append(dataset[x])  
+trainingSet = []
+testSet = []
+loadDataset("my.dat" , 0.66, trainingSet, testSet)
